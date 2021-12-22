@@ -6,7 +6,6 @@ from bson.json_util import dumps
 from flask import jsonify, request
 from werkzeug.utils import redirect
 
-
 app = Flask(__name__)
 app.config['MONGO_URI'] = "mongodb://localhost:27017/blore_house"
 mongo = PyMongo(app)
