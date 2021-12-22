@@ -1,9 +1,8 @@
 from bson.objectid import ObjectId
-from flask import Flask, json, render_template
+from flask import Flask, json, render_template, url_for
 import requests
 from flask_pymongo import PyMongo
 from bson.json_util import dumps
-
 from flask import jsonify, request
 from werkzeug.utils import redirect
 
@@ -70,6 +69,12 @@ def update_location(id):
             return resp
         else:
             return not_found()
+
+
+@app.route('/display/<filename>')
+def display_image(filename):
+	#print('display_image filename: ' + filename)
+	return redirect(url_for('static', filename=filename), code=301)
 
 # Frontend
 @app.route('/', methods=['GET', 'POST'])

@@ -3,6 +3,9 @@
 {% block content %}
     <div>
       <div class="container">
+        <div class="p-4 text-center bg-light">
+          <h4 class="mb-2">Create</h4>
+        </div>
         <form action="#" method="post">
           <div class="row">
             <div class="col-6">
@@ -46,13 +49,36 @@
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-success">Submit</button>
+          <button type="submit" class="btn btn-success px-3">Submit</button>
+          <button type="button" class="btn btn-primary px-3" data-toggle="modal" data-target="#modalgraph">View Graphs</button>
         </form>
+        <div id="modalgraph" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                           <h4 class="modal-title">Graphs</h4>
+                        </div>
+                        <div class="modal-body">
+
+                          <img src="{{ url_for('display_image', filename='graph2.jpeg') }}" alt="graph" class="img-fluid">
+                          <img src="{{ url_for('display_image', filename='whitefield.png') }}" alt="graph" class="img-fluid">
+                          
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+        </div>
       </div>
-      <br>
       
+      <br>
+
+      <div class="p-4 text-center bg-light">
+        <h4 class="mb-2">Read, Update, Delete</h4>
+      </div>
       <div class="container">
-            <table class="table">
+            <table class="table table-striped table-dark">
               <thead>
                 <tr>
                   <th scope="col">Loation</th>
@@ -136,11 +162,12 @@
                
                
                         </div>
-                     </div>
-               
-               
                   </div>
+               
+               
+                </div>
                   {% endfor %}
+                  
               </tbody>
             </table>
           </div>
