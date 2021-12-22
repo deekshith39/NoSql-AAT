@@ -1,0 +1,147 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div>
+      <div class="container">
+        <form action="#" method="post">
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Location</label>
+                <input type="text" class="form-control" name="location" placeholder="Name" required>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="exampleInputPassword1">Total Square Feet</label>
+                <input type="text" class="form-control" name="total_sqft" placeholder="Total Square Feet" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Bath</label>
+                <input type="text" class="form-control" name="bath" placeholder="Bath" required>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="exampleInputPassword1">Price in lacs</label>
+                <input type="text" class="form-control" name="price_in_lacs" placeholder="Price in lacs" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="exampleInputEmail1">BHK</label>
+                <input type="text" class="form-control" name="bhk" placeholder="BHK" required>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="exampleInputPassword1">Price per sqft</label>
+                <input type="text" class="form-control" name="price_per_sqft" placeholder="price_per_sqft" required>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+      </div>
+      <br>
+      
+      <div class="container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Loation</th>
+                  <th scope="col">Total Square Feet</th>
+                  <th scope="col">Bath</th>
+                  <th scope="col">Price in lacs</th>
+                  <th scope="col">BHK</th>
+                  <th scope="col">Price per sqft</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {% for datas in data[-5:]|reverse %}
+                  <tr onClick="location.href=`/location/{{ datas['_id']['$oid'] }}`;">
+                <tr>
+                  <td>{{ datas['location'] }}</td>
+                  <td>{{ datas['total_sqft'] }}</td>
+                  <td>{{ datas['bath'] }}</td>
+                  <td>{{ datas['price_in_lacs'] }}</td>
+                  <td>{{ datas['bhk'] }}</td>
+                  <td>{{ datas['price_per_sqft'] }}</td>
+                  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modaledit{{ datas['_id']['$oid'] }}">Update</button></td></td></td>
+                  <td><a href="/delete/{{ datas['_id']['$oid'] }}"><button type="button" class="btn btn-danger">Delete</button></a></td>
+                </tr>
+                <div id="modaledit{{ datas['_id']['$oid'] }}" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header">
+                           <h4 class="modal-title">Update Information</h4>
+                        </div>
+                        <div class="modal-body">
+                           <form action="/update/{{ datas['_id']['$oid'] }}" method="POST">
+               
+               
+                              <div class="form-group">
+                                 <label>Location:</label>
+                                 <input type="text" class="form-control" name="location" value="{{ datas['location'] }}">
+                              </div>
+              
+                              <div class="form-group">
+                                 <label>total_sqft:</label>
+                                 <input type="text" class="form-control" name="total_sqft" value="{{datas['total_sqft']}}">
+                              </div>
+               
+               
+                              <div class="form-group">
+                                 <label>bath:</label>
+                                 <input type="text" class="form-control" name="bath" value="{{datas['bath']}}">
+                              </div>
+
+                              <div class="form-group">
+                                <label>price_in_lacs:</label>
+                                <input type="text" class="form-control" name="price_in_lacs" value="{{datas['price_in_lacs']}}">
+                             </div>
+
+                             <div class="form-group">
+                              <label>bhk:</label>
+                              <input type="text" class="form-control" name="bhk" value="{{datas['bhk']}}">
+                           </div>
+
+                           <div class="form-group">
+                            <label>price_per_sqft:</label>
+                            <input type="text" class="form-control" name="price_per_sqft" value="{{datas['price_per_sqft']}}">
+                         </div>
+               
+               
+                              <div class="form-group">
+                                 <button class="btn btn-primary" type="submit">Update</button>
+                              </div>
+               
+               
+                           </form>
+               
+               
+                        </div>
+               
+               
+                        <div class="modal-footer">
+               
+               
+                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+               
+               
+                        </div>
+                     </div>
+               
+               
+                  </div>
+                  {% endfor %}
+              </tbody>
+            </table>
+          </div>
+{% endblock content %}   
